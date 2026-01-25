@@ -1,6 +1,6 @@
 package com.fitmesh.fitmeshbackend.domain.enums;
 
 public enum PaymentType {
-    SINGLE,
+    SINGLE_PAYMENT,
     SUBSCRIPTION
 }

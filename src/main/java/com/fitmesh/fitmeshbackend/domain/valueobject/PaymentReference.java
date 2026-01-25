@@ -76,15 +76,26 @@ public final class PaymentReference {
 
     //FACTORY METHODS
 
+//    public static PaymentReference generate(int sequence) {
+//        String datePart = LocalDate.now()
+//                .format(DateTimeFormatter.BASIC_ISO_DATE); // yyyyMMdd
+//
+//        String generated =
+//                PREFIX + "-" + datePart + "-" + sequence;
+//
+//        return new PaymentReference(generated);
+//    }
+
     public static PaymentReference generate(int sequence) {
         String datePart = LocalDate.now()
-                .format(DateTimeFormatter.BASIC_ISO_DATE); // yyyyMMdd
+                .format(DateTimeFormatter.BASIC_ISO_DATE);
 
         String generated =
-                PREFIX + "-" + datePart + "-" + sequence;
+                PREFIX + "-" + datePart + "-" + String.format("%03d", sequence);
 
         return new PaymentReference(generated);
     }
+
 
     public static PaymentReference of(String rawValue) {
         return new PaymentReference(rawValue);
