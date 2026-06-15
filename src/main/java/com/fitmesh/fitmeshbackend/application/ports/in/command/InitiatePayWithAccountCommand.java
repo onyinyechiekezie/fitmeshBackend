@@ -1,46 +1,50 @@
 package com.fitmesh.fitmeshbackend.application.ports.in.command;
 
+import com.fitmesh.fitmeshbackend.domain.enums.Currency;
+import com.fitmesh.fitmeshbackend.domain.enums.PaymentType;
+
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class InitiatePayWithAccountCommand {
 
-    private String userId;
-    private BigDecimal amount;
-    private String currency;
-    private String planId;
+    private final String userId;
+    private final BigDecimal amount;
+    private final Currency currency;
+    private final PaymentType paymentType;
+    private final String description;
 
-    public InitiatePayWithAccountCommand() {
+    public InitiatePayWithAccountCommand(
+            String userId,
+            BigDecimal amount,
+            Currency currency,
+            PaymentType paymentType,
+            String description
+    ) {
+        this.userId = Objects.requireNonNull(userId, "userId must not be null");
+        this.amount = Objects.requireNonNull(amount, "amount must not be null");
+        this.currency = Objects.requireNonNull(currency, "currency must not be null");
+        this.paymentType = Objects.requireNonNull(paymentType, "paymentType must not be null");
+        this.description = description;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public PaymentType getPaymentType() {
+        return paymentType;
     }
 
-    public String getPlanId() {
-        return planId;
-    }
-
-    public void setPlanId(String planId) {
-        this.planId = planId;
+    public String getDescription() {
+        return description;
     }
 }

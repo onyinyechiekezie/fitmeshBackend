@@ -1,35 +1,44 @@
 package com.fitmesh.fitmeshbackend.application.ports.out.result;
 
+import java.util.Objects;
+
 public class ProviderPaymentResponse {
 
-    private String providerReference;
-    private String status;
-    private String rawResponse;
+    private final String providerReference;
+    private final String status;
+    private final String redirectUrl;
+    private final String message;
 
-    public ProviderPaymentResponse() {
+    public ProviderPaymentResponse(
+            String providerReference,
+            String status,
+            String redirectUrl,
+            String message
+    ) {
+        this.providerReference = Objects.requireNonNull(
+                providerReference,
+                "providerReference must not be null"
+        );
+        this.status = Objects.requireNonNull(status, "status must not be null");
+        this.redirectUrl = redirectUrl;
+        this.message = message;
     }
 
     public String getProviderReference() {
         return providerReference;
     }
 
-    public void setProviderReference(String providerReference) {
-        this.providerReference = providerReference;
-    }
-
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getRedirectUrl() {
+        return redirectUrl;
     }
 
-    public String getRawResponse() {
-        return rawResponse;
-    }
-
-    public void setRawResponse(String rawResponse) {
-        this.rawResponse = rawResponse;
+    public String getMessage() {
+        return message;
     }
 }
+
+   
