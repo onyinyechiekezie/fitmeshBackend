@@ -1,10 +1,28 @@
 package com.fitmesh.fitmeshbackend.application.ports.in.result;
 
+import java.time.Instant;
+
 public class InitiatePaymentResult {
 
     private String paymentId;
-    private String reference;
+    private String paymentReference;
     private String providerStatus;
+    private String redirectUrl;
+    private Instant initiatedAt;
+
+    public InitiatePaymentResult(
+            String paymentId,
+            String paymentReference,
+            String providerStatus,
+            String redirectUrl,
+            Instant initiatedAt
+    ) {
+        this.paymentId = paymentId;
+        this.paymentReference = paymentReference;
+        this.providerStatus = providerStatus;
+        this.redirectUrl = redirectUrl;
+        this.initiatedAt = initiatedAt;
+    }
 
     public InitiatePaymentResult() {
     }
@@ -13,23 +31,19 @@ public class InitiatePaymentResult {
         return paymentId;
     }
 
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
+    public String getPaymentReference() {
+        return paymentReference;
     }
 
     public String getProviderStatus() {
         return providerStatus;
     }
 
-    public void setProviderStatus(String providerStatus) {
-        this.providerStatus = providerStatus;
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public Instant getInitiatedAt() {
+        return initiatedAt;
     }
 }
