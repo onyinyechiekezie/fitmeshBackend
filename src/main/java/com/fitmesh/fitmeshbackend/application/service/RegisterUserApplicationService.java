@@ -7,6 +7,7 @@ import com.fitmesh.fitmeshbackend.application.ports.out.PasswordEncoderPort;
 import com.fitmesh.fitmeshbackend.application.ports.out.TokenGeneratorPort;
 import com.fitmesh.fitmeshbackend.application.ports.out.UserRepository;
 import com.fitmesh.fitmeshbackend.domain.enums.UserRole;
+import com.fitmesh.fitmeshbackend.domain.exception.InvalidPasswordException;
 import com.fitmesh.fitmeshbackend.domain.exception.UserAlreadyExistsException;
 import com.fitmesh.fitmeshbackend.domain.model.User;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,9 @@ public class RegisterUserApplicationService implements RegisterUserUseCase {
             throw new UserAlreadyExistsException("phone number", command.getPhoneNumber());
         }
 
+        // Validate password strength
+        validatePassword(command.getPassword());
+
         // Hash password
         String passwordHash = passwordEncoder.encode(command.getPassword());
 
@@ -72,5 +76,23 @@ public class RegisterUserApplicationService implements RegisterUserUseCase {
                 user.getEmail(),
                 token
         );
+    }
+
+    private void validatePassword(String password) {
+        if (password.length() < 8) {
+            throw new InvalidPasswordException("Password must be at least 8 characters");
+        }
+        if (!password.matches(".*[A-Z].*")) {
+            throw new InvalidPasswordException("Password must contain uppercase letter");
+        }
+        if (!password.matches(".*[a-z].*")) {
+            throw new InvalidPasswordException("Password must contain lowercase letter");
+        }
+        if (!password.matches(".*[0-9].*")) {
+            throw new InvalidPasswordException("Password must contain number");
+        }
+        if (!password.matches(".*[!@#$%^&*].*")) {
+            throw new InvalidPasswordException("Password must contain special character");
+        }
     }
 }

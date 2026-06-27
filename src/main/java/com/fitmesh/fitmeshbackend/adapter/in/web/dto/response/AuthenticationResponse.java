@@ -1,7 +1,8 @@
 package com.fitmesh.fitmeshbackend.adapter.in.web.dto.response;
 
-public class AuthenticationResponse {
+import java.util.List;
 
+public class AuthenticationResponse {
     private final String userId;
     private final String email;
     private final String token;
@@ -23,4 +24,6 @@ public class AuthenticationResponse {
     public String getToken() {
         return token;
     }
+
+
 }
